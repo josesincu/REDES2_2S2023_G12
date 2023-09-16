@@ -1,0 +1,58 @@
+
+# despues de crear las vlan
+sw(config)#:interface vlan 10
+sw(config-if):ip address #gateway mascara_subred
+sw(config-if):no shutdown
+
+sw(config)#:interface f0/11
+sw(config)#:switchport mode access
+sw(config)#:switchport access vlan #
+
+===================================
+CONFIGURAR OSPF
+sw(config)#:ip routing
+sw(config)#: router ospf ID
+sw(config-router)#:network 3.3.3.0 0.0.0.255 area 10
+sw(config-router)#:network 192.168.14.0 0.0.0.255 area 10
+sw(config-router)#:network 192.168.15.0 0.0.0.255 area 10
+
+===================================
+CONFIGURAR OSPF
+sw(config)#:ip routing
+sw(config)#: router iegrp ID
+sw(config-router)#:network 3.3.3.0 
+sw(config-router)#:network 192.168.14.0 
+sw(config-router)#:network 192.168.15.0
+sw(config-router)#:no auto-summary 
+
+===============================
+TRUNCAL
+sw1> enable
+sw1# configure terminal
+sw1(config)# interface fastethernet [#]/[#]
+sw1(config-if)# switchport mode trunk
+sw1(config-if)# switchport trunk allowed vlan [all|#]
+sw1(config-if)# exit
+===========================================
+ACCESO
+sw1> enable
+sw1# configure terminal
+sw1(config)# interface fastethernet [#]/[#]
+sw1(config-if)# switchport mode access
+sw1(config-if)# switchport access vlan [id]
+sw1(config-if)# exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
