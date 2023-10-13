@@ -1,4 +1,12 @@
+ =====================================
+	CONFIGURAR VTP
+sw(config)# vtp mode [client|server|transparent]
+sw(config)# vtp version [1|2]
+sw(config)# vtp domain [domain]
+sw(config)# vtp password [pass]
+sw(config)# exit
 
+=====================================
 # despues de crear las vlan
 sw(config)#:interface vlan 10
 sw(config-if):ip address #ip #gateway mascara_subred
@@ -43,6 +51,7 @@ sw1(config-if)# switchport access vlan [id]
 sw1(config-if)# exit
 
 ===========================================
+LACP
 SW1
 configure terminal
 interface range f0/1-2
@@ -56,6 +65,33 @@ interface range f0/1-2
 channel-group 2 mode passive
 no shutdown
 
+==================================================
+HSRP O VRRP
+SW1:
+
+sw(config)#:interface fa0/1
+sw(config-if)#:no switchport
+sw(config-if)#:ip address #ip #mascara_red
+sw(config-if)#:duplex auto
+sw(config-if)#:speed auto
+sw(config-if)#:standbay 0 ip #ip_flotante
+sw(config-if)#:standby priority 10
+sw(config-if)#:standby preempt
+sw(config-if)#:do write
+sw(config)#:
+
+
+SW2:
+sw(config)#:interface fa0/2
+sw(config-if)#:no switchport
+sw(config-if)#:ip address #ip #mascara_red
+sw(config-if)#:duplex auto
+sw(config-if)#:speed auto
+sw(config-if)#:standbay 0 ip #ip_flotante
+sw(config-if)#:standby priority 10
+sw(config-if)#:standby preempt
+sw(config-if)#:do write
+sw(config)#:
 
 
 
